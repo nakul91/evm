@@ -8,6 +8,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/vm"
 
 	bankprecompile "github.com/cosmos/evm/precompiles/bank"
+	bitcoinprecompile "github.com/cosmos/evm/precompiles/bitcoin"
 	"github.com/cosmos/evm/precompiles/bech32"
 	cmn "github.com/cosmos/evm/precompiles/common"
 	distprecompile "github.com/cosmos/evm/precompiles/distribution"
@@ -97,6 +98,11 @@ func NewAvailableStaticPrecompiles(
 	slashingPrecompile, err := slashingprecompile.NewPrecompile(slashingKeeper)
 	if err != nil {
 		panic(fmt.Errorf("failed to instantiate slashing precompile: %w", err))
+	}
+
+	bitcoinPrecompile, err := bitcoinprecompile.NewPrecompile(stakingKeeper)
+	if err != nil {
+		panic(fmt.Errorf("failed to instantiate bitcoin precompile: %w", err))
 	}
 
 	evidencePrecompile, err := evidenceprecompile.NewPrecompile(evidenceKeeper)
